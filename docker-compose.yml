@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: bd2_mongo
+    ports:
+      - "27017:27017"
+    # El volumen queda gestionado por Docker, no ensucia tu repo
+    volumes:
+      - mongo_data:/data/db
+
+  cassandra:
+    image: cassandra:4.1
+    container_name: bd2_cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TestCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+
+volumes:
+  mongo_data:
+  cassandra_data:

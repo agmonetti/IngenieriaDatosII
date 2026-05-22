@@ -1,0 +1,8 @@
+# Bases de datos y volúmenes
+/data
+/mongodata
+/cassandra_data
+
+# Logs y temporales
+*.log
+.DS_Store
