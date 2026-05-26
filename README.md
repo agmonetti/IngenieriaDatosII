@@ -4,7 +4,7 @@ Repositorio personal para las prácticas de Bases de Datos II (NoSQL) y Persiste
 
 El objetivo de este repo es mantener un entorno de desarrollo limpio, utilizando Docker para levantar los motores de bases de datos solo cuando se necesitan, sin instalar nada directamente en el sistema operativo (Arch Linux) y sin versionar basura ni archivos de datos.
 
-### ¿Qué contempla este entorno?
+### Repositorio
 
 * **Infraestructura Descartable:** Un `docker-compose.yml` que levanta de forma simultánea **MongoDB**, **Cassandra**, **Neo4j** y **Redis**.
 * **Automatización de Terminal:** Scripts y alias integrados en `.zshrc` para levantar los contenedores, dividir la pantalla en el emulador Kitty, y conectar las consolas interactivas (CLI) automáticamente.

@@ -1,0 +1,52 @@
+# Funciones usadas
+previoBD() {
+  # Toma el primer parámetro que le pases. Si no le pasás nada, usa 'borrador.txt' por defecto.
+  local archivo="${1:-borrador.txt}"
+
+  # Levanta la infra
+  docker compose -f ~/Documentos/previoIngenieriaDatosII/docker-compose.yml up -d > /dev/null 2>&1
+  
+  local session_data="layout splits
+	cd $PWD
+	# Micro ahora abre el archivo que le pasaste como parámetro
+	launch --title 'Editor BD2' micro $archivo
+	launch --location=vsplit --title 'Consola BD2' zsh
+	focus matching title:Consola BD2
+	resize_window wider 10"
+
+  echo "$session_data" | kitty \
+    -o window_border_width=1pt \
+    -o active_border_color="#313244" \
+    -o inactive_border_color="#1e1e2e" \
+    --session - --detach
+}
+
+
+
+# conectores para las bases de datos previo
+levantarMongo() {
+  echo "Conectando a MongoDB..."
+  docker exec -it bd2_mongo mongosh
+}
+
+levantarCassandra() {
+  echo "Conectando a Cassandra..."
+  docker exec -it bd2_cassandra cqlsh
+}
+
+levantarNeo4j() {
+  echo "Conectando a la CLI de Neo4j (cypher-shell)..."
+  # Usa las credenciales definidas en el docker-compose
+  docker exec -it bd2_neo4j cypher-shell -u neo4j -p uade1234
+}
+
+levantarRedis() {
+  echo "Conectando a la CLI de Redis (redis-cli)..."
+  docker exec -it bd2_redis redis-cli
+}
+
+
+# Alias
+alias bd2-nuke="docker compose -f ~/Documentos/previoIngenieriaDatosII/docker-compose.yml down -v"
+alias bd2-down="docker compose -f ~/Documentos/previoIngenieriaDatosII/docker-compose.yml down"
+alias bd2-up="docker compose -f ~/Documentos/previoIngenieriaDatosII/docker-compose.yml up -d"
