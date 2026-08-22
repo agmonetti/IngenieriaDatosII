@@ -232,12 +232,11 @@ db.artistas.updateOne(
 )
 
 //Operación 7: Cambiar el nivel de una habilidad.  
+//Si sabés la posición en el array (ej. el primer elemento [0])
 db.artistas.updateOne(
   { nombre: "Ghost" },
   {
-    $set: {
-      habilidades: { nivel: "Show normalito" }
-    }
+    $set: { "habilidades.2.nivel": "Show excelente" }
   }
 )
 
