@@ -128,32 +128,33 @@ VALUES (uuid(), 'Teclado Mecanico RGB', ['teclado', 'gaming', 'perifericos'], 'T
 INSERT INTO producto_por_id (id_producto, titulo, tags, descripcion, categoria)
 VALUES (uuid(), 'Monitor Gamer 144Hz', ['monitor', 'gaming', 'pantalla'], 'Monitor IPS 24 pulgadas 144Hz', 'Monitores');
 
+--hago las consultas para copy pastear los uuids manualmente en las otras tablas
+SELECT * FROM usuario_por_id;
+SELECT * FROM producto_por_id;
+
+
 -- 3. Insertar Productos publicados por un usuario (Consulta 3)
--- Asignamos ambos productos como publicados por 'carlos_perez'
 INSERT INTO producto_publicado_por_usuario (nombre_usuario, id_producto, titulo, tags, descripcion, categoria)
-VALUES ('carlos_perez', 81098af1-8a3f-4ca7-8a23-6009e9bc4e74, 'Teclado Mecanico RGB', ['teclado', 'gaming', 'perifericos'], 'Teclado mecanico switch blue', 'Perifericos');
+VALUES ('carlos_perez', 86f53f31-b338-48a6-a878-d150e36d0823, 'Teclado Mecanico RGB', ['teclado', 'gaming', 'perifericos'], 'Teclado mecanico switch blue', 'Perifericos');
 
 INSERT INTO producto_publicado_por_usuario (nombre_usuario, id_producto, titulo, tags, descripcion, categoria)
-VALUES ('carlos_perez', 02bf5743-d4d6-472f-933e-959d9c185a10, 'Monitor Gamer 144Hz', ['monitor', 'gaming', 'pantalla'], 'Monitor IPS 24 pulgadas 144Hz', 'Monitores');
+VALUES ('carlos_perez', fe2621e8-3f72-4e29-81db-5e686e7b9fe1, 'Monitor Gamer 144Hz', ['monitor', 'gaming', 'pantalla'], 'Monitor IPS 24 pulgadas 144Hz', 'Monitores');
 
 
 -- 4. Insertar Comentarios de un producto (Consulta 4)
--- maria_gomez comenta el teclado y carlos_perez le responde
 INSERT INTO comentario_de_producto_por_usuario (nombre_producto, id_comentario, id_usuario, nombre_usuario, comentario, fecha)
-VALUES ('Teclado Mecanico RGB', uuid(), a64a8550-7130-4c08-8ad6-281f1a4a18ae, 'maria_gomez', 'Excelente teclado, muy buenas teclas.', toTimestamp(now()));
+VALUES ('Teclado Mecanico RGB', uuid(), 6a6ee96b-338f-4291-9267-2ec362441fed, 'maria_gomez', 'Excelente teclado, muy buenas teclas.', toTimestamp(now()));
 
 INSERT INTO comentario_de_producto_por_usuario (nombre_producto, id_comentario, id_usuario, nombre_usuario, comentario, fecha)
-VALUES ('Teclado Mecanico RGB', uuid(), 3f013ac6-5853-4ef1-99ee-1e69d8909faa, 'carlos_perez', 'Gracias por la reseña!', toTimestamp(now()));
+VALUES ('Teclado Mecanico RGB', uuid(), d86e0e23-baef-40ea-8698-d2720c251bb1, 'carlos_perez', 'Gracias por la reseña!', toTimestamp(now()));
 
 
 -- 5. Insertar Calificaciones de productos por usuario con fecha (Consulta 5)
--- maria_gomez califica ambos productos en distintas fechas
 INSERT INTO producto_calificado_por_fecha (id_usuario, fecha, id_producto, nombre_producto, calificacion)
-VALUES (a64a8550-7130-4c08-8ad6-281f1a4a18ae, '2026-08-20 14:30:00', 81098af1-8a3f-4ca7-8a23-6009e9bc4e74, 'Teclado Mecanico RGB', 9);
+VALUES (6a6ee96b-338f-4291-9267-2ec362441fed, '2026-08-20 14:30:00', 86f53f31-b338-48a6-a878-d150e36d0823, 'Teclado Mecanico RGB', 9);
 
 INSERT INTO producto_calificado_por_fecha (id_usuario, fecha, id_producto, nombre_producto, calificacion)
-VALUES (a64a8550-7130-4c08-8ad6-281f1a4a18ae, '2026-08-25 18:00:00', 02bf5743-d4d6-472f-933e-959d9c185a10, 'Monitor Gamer 144Hz', 10);
-
+VALUES (6a6ee96b-338f-4291-9267-2ec362441fed, '2026-08-25 18:00:00', fe2621e8-3f72-4e29-81db-5e686e7b9fe1, 'Monitor Gamer 144Hz', 10);
 
 -- CONSULTAS
 
