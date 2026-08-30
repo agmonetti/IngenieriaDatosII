@@ -1,0 +1,18 @@
+# HSET clave campo1 valor1 campo2 valor2 ...
+HSET instancia:101 estado "EN_PROCESO" tarea_actual "t_500" asingnado "u:20" 
+EXPIRE instancia:101 3600
+
+#SADD clave miembro1 miembro2 ...
+SADD tareas_pendientes:rol:soporte "t_500" "t_501" "t_502"
+
+#CONSULTAMOS LA INFO
+HGETALL instancia:101
+
+SMEMBERS tareas_pendientes:rol:soporte
+
+#Remover la tarea completada de pendientes
+SREM tareas_pendientes:rol:soporte "t_500"
+
+#remuevo la opcion de 101 ó la invalido
+DEL instancia:101
+HSET instancia:101 estado "COMPLETADA" tarea_actual "" 
