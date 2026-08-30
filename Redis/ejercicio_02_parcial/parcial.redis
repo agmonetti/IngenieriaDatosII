@@ -1,0 +1,39 @@
+#1. Estado actual de instancia (Hash con TTL de 300s):
+
+HSET instancia:101:estado estado "EN_PROCESO" usuario_asignado "u:20" ultima_act "2026-08-29T21:00:00Z"
+
+EXPIRE instancia:101:estado 300
+
+#2. Tareas pendientes por rol (Set con TTL de 600s):
+SADD tareas:rol:soporte:pendientes "tarea:500" "tarea:501" "tarea:502"
+
+EXPIRE tareas:rol:soporte:pendientes 600
+
+#3. Sesión de usuario (Hash con TTL de 24h / 86400s):
+HSET sesion:tok_abc123 user_id "u:20" tenant_id "tenant_A" rol "soporte"
+
+EXPIRE sesion:tok_abc123 86400
+
+#4. Rate limit por tenant (String atómico con TTL de 60s):
+
+INCR ratelimit:tenant:tenant_A:minuto_45
+
+EXPIRE ratelimit:tenant:tenant_A:minuto_45 60
+
+
+#5. Contador de consultas de estado (String acumulativo sin TTL)
+
+INCRBY metricas:consultas:tenant:tenant_A 15
+
+
+
+##Comandos útiles para checkear:
+
+#Listar todas las claves activas en tu base:
+KEYS *
+
+#Ver el tiempo restante de vida de una clave (en segundos):
+TTL instancia:101:estado
+
+#Ver el tipo de dato de una clave:
+TYPE tareas:rol:soporte:pendientes
