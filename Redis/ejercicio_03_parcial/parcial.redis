@@ -1,0 +1,35 @@
+# Carrito usuario 101: 1 producto_55, 2 producto_65
+HSET carrito:usuario_101 producto:prod_55 1 producto:prod_65 2
+
+# Agrego un prod_65
+HINCRBY carrito:usuario_101 producto:prod_65 1
+
+# Time to Leave al carrito del usuario, 7 dias
+EXPIRE carrito:usuario_101 604800
+
+# Carrito usuario 102: 10 producto_55, 4 producto_35
+HSET carrito:usuario_102 producto:prod_55 10 producto:prod_35 4
+
+# Agrego 2 prod_35
+HINCRBY carrito:usuario_102 producto:prod_65 2
+
+# Time to Leave al carrito del usuario, 7 dias
+EXPIRE carrito:usuario_102 604800
+
+#TRaigo todos los campos del carrito del user 102
+HGETALL carrito:usuario_102
+
+#Verifico si tal campo existe
+HEXISTS carrito:usuario_101 descuento:DESC01
+
+#Le agrego desc al 101, 20%
+HSET carrito:usuario_101 descuento:DESC01 20
+
+# 1. Contar cuántos ítems/campos tiene el carrito
+HLEN carrito:usuario_101
+
+# 2. Ver únicamente las claves internas del hash
+HKEYS carrito:usuario_101
+
+# 3. Intentar setear un cupón solo si no tiene uno aplicado (devolverá 1 si entró, 0 si ya existía)
+HSETNX carrito:usuario_101 cupon "BLACKFRIDAY"
